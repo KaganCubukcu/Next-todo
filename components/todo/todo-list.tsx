@@ -128,6 +128,23 @@ export function TodoList() {
     }
   };
 
+  const updateTodo = async (id: string, task: string) => {
+    try {
+      const { error } = await supabase
+        .from('todos')
+        .update({ task })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      setTodos(todos.map(t => 
+        t.id === id ? { ...t, task } : t
+      ));
+    } catch (error) {
+      console.error('Error updating todo:', error);
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -150,6 +167,7 @@ export function TodoList() {
             is_complete={todo.is_complete}
             onToggle={toggleTodo}
             onDelete={deleteTodo}
+            onUpdate={updateTodo}
           />
         ))}
       </div>
