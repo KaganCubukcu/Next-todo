@@ -25,7 +25,7 @@ export default function Home() {
   if (!user) {
     return (
       <div className="flex flex-col items-center gap-8 max-w-2xl mx-auto text-center">
-        <h1 className="text-4xl font-bold">Welcome to Next Todo</h1>
+        <h1 className="text-4xl font-bold">Welcome to Focus Flow</h1>
         <p className="text-xl text-muted-foreground">
           The simple, efficient way to manage your tasks. Sign in to create and manage your personal todo list.
         </p>

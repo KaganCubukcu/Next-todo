@@ -11,11 +11,11 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js Todo App",
-  description: "Next.js Todo App Supabase",
+  title: "Focus Flow",
+  description: "Focus Flow - Your Productivity Hub",
 };
 
-export default function RootLayout({
+export default function RootLayout ({
   children,
 }: {
   children: React.ReactNode;
@@ -35,7 +35,7 @@ export default function RootLayout({
               <div className="flex-1 w-full flex flex-col gap-20 items-center">
                 <div className="flex flex-col gap-20 max-w-5xl p-5 pt-8">
                   <div className="flex flex-col items-center">
-                    <h1 className="text-4xl font-bold mb-8">Next.js Todo App</h1>
+                    <h1 className="text-4xl font-bold mb-8">Focus Flow</h1>
                     {children}
                   </div>
                 </div>
@@ -44,7 +44,7 @@ export default function RootLayout({
             <footer className="w-full border-t">
               <div className="container flex h-14 items-center justify-between">
                 <p className="text-sm text-muted-foreground">
-                  Next Todo
+                  Focus Flow
                 </p>
                 <ThemeSwitcher />
               </div>

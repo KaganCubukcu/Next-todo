@@ -1,4 +1,4 @@
-# Next Todo App
+# Focus Flow
 
 A modern, full-stack todo application built with Next.js 15, Supabase, and Tailwind CSS. Features user authentication, real-time updates, and a clean, responsive interface.
 

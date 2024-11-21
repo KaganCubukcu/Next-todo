@@ -41,7 +41,7 @@ export function Navbar() {
       <div className="h-16 container flex items-center justify-between">
         {/* Brand */}
         <Link href="/" className="font-bold text-xl">
-          Next Todo
+          Focus Flow
         </Link>
 
         {/* Auth Section */}
