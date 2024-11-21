@@ -14,6 +14,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { TodoActions } from "./todo-actions";
 
 interface TodoItemProps {
   id: string;
@@ -58,7 +59,7 @@ export function TodoItem({ id, task, is_complete, onToggle, onDelete, onUpdate }
 
   return (
     <>
-      <div className="flex items-center space-x-2 p-2 hover:bg-accent rounded-md group">
+      <div className="flex items-center space-x-2 p-2 hover:bg-accent rounded-md">
         <Checkbox
           id={id}
           checked={is_complete}
@@ -88,20 +89,10 @@ export function TodoItem({ id, task, is_complete, onToggle, onDelete, onUpdate }
             {task}
           </Label>
         )}
-        <div className="opacity-0 group-hover:opacity-100 flex items-center gap-2">
-          <button
-            onClick={() => setIsEditing(true)}
-            className="text-primary hover:text-primary/80 transition-colors"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => setShowDeleteDialog(true)}
-            className="text-destructive hover:text-destructive/80 transition-colors"
-          >
-            Delete
-          </button>
-        </div>
+        <TodoActions
+          onEdit={() => setIsEditing(true)}
+          onDelete={() => setShowDeleteDialog(true)}
+        />
       </div>
 
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
@@ -109,17 +100,12 @@ export function TodoItem({ id, task, is_complete, onToggle, onDelete, onUpdate }
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the todo item.
+              This action cannot be undone. This will permanently delete your todo.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDelete}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
-              Delete
-            </AlertDialogAction>
+            <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
