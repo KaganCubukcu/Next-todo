@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { User } from "@supabase/supabase-js";
+import { ThemeSwitcher } from "../theme-switcher";
 
 export function Navbar() {
   const [user, setUser] = useState<User | null>(null);
@@ -44,8 +45,9 @@ export function Navbar() {
           Focus Flow
         </Link>
 
-        {/* Auth Section */}
-        <div>
+        {/* Theme and Auth Section */}
+        <div className="flex items-center">
+        <ThemeSwitcher />
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
