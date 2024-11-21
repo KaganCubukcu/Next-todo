@@ -5,6 +5,7 @@ import { TodoItem } from "./todo-item";
 import { TodoInput } from "./todo-input";
 import { createClient } from "@/utils/supabase/client";
 import { useTodoOperations } from "@/hooks/useTodoOperations";
+import { Loading } from "../ui/loading";
 
 interface Todo {
   id: string;
@@ -118,7 +119,11 @@ export function TodoList() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+    <div>
+      <Loading />
+    </div>
+    );
   }
 
   return (
