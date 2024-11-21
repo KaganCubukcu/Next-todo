@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { TodoItem } from "./todo-item";
 import { TodoInput } from "./todo-input";
 import { createClient } from "@/utils/supabase/client";
+import { useTodoOperations } from "@/hooks/useTodoOperations";
 
 interface Todo {
   id: string;
@@ -18,6 +19,7 @@ export function TodoList() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
   const supabase = createClient();
+  const { addTodo: addTodoWithToast, updateTodo: updateTodoWithToast, deleteTodo: deleteTodoWithToast } = useTodoOperations();
   
   useEffect(() => {
     // Check authentication status
@@ -72,19 +74,7 @@ export function TodoList() {
         throw new Error('Must be logged in to add todos');
       }
 
-      const newTodo = {
-        task,
-        is_complete: false,
-        user_id: session.user.id
-      };
-
-      const { data, error } = await supabase
-        .from('todos')
-        .insert([newTodo])
-        .select()
-        .single();
-
-      if (error) throw error;
+      const data = await addTodoWithToast(task, session.user.id);
       if (data) {
         setTodos([data, ...todos]);
       }
@@ -98,13 +88,7 @@ export function TodoList() {
       const todo = todos.find(t => t.id === id);
       if (!todo) return;
 
-      const { error } = await supabase
-        .from('todos')
-        .update({ is_complete: !todo.is_complete })
-        .eq('id', id);
-
-      if (error) throw error;
-
+      await updateTodoWithToast(Number(id), { is_complete: !todo.is_complete });
       setTodos(todos.map(t => 
         t.id === id ? { ...t, is_complete: !t.is_complete } : t
       ));
@@ -113,35 +97,23 @@ export function TodoList() {
     }
   };
 
-  const deleteTodo = async (id: string) => {
-    try {
-      const { error } = await supabase
-        .from('todos')
-        .delete()
-        .eq('id', id);
-
-      if (error) throw error;
-
-      setTodos(todos.filter(t => t.id !== id));
-    } catch (error) {
-      console.error('Error deleting todo:', error);
-    }
-  };
-
   const updateTodo = async (id: string, task: string) => {
     try {
-      const { error } = await supabase
-        .from('todos')
-        .update({ task })
-        .eq('id', id);
-
-      if (error) throw error;
-
+      await updateTodoWithToast(Number(id), { task });
       setTodos(todos.map(t => 
         t.id === id ? { ...t, task } : t
       ));
     } catch (error) {
       console.error('Error updating todo:', error);
+    }
+  };
+
+  const deleteTodo = async (id: string) => {
+    try {
+      await deleteTodoWithToast(Number(id));
+      setTodos(todos.filter(t => t.id !== id));
+    } catch (error) {
+      console.error('Error deleting todo:', error);
     }
   };
 
