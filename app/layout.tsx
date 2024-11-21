@@ -1,5 +1,4 @@
 import { Navbar } from "@/components/ui/navbar";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from 'sonner';
@@ -46,7 +45,6 @@ export default function RootLayout ({
                 <p className="text-sm text-muted-foreground">
                   Focus Flow
                 </p>
-                <ThemeSwitcher />
               </div>
             </footer>
             <Toaster position="top-right" closeButton richColors />
