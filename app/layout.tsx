@@ -2,6 +2,7 @@ import { Navbar } from "@/components/ui/navbar";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from 'sonner';
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -48,6 +49,7 @@ export default function RootLayout({
                 <ThemeSwitcher />
               </div>
             </footer>
+            <Toaster position="top-right" closeButton richColors />
           </div>
         </ThemeProvider>
       </body>
