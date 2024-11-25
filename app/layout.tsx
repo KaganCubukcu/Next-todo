@@ -2,6 +2,7 @@ import { Navbar } from "@/components/ui/navbar";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from 'sonner';
+import { Footer } from "@/components/footer";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -40,13 +41,7 @@ export default function RootLayout ({
                 </div>
               </div>
             </div>
-            <footer className="w-full border-t">
-              <div className="container flex h-14 items-center justify-between">
-                <p className="text-sm text-muted-foreground">
-                  Focus Flow
-                </p>
-              </div>
-            </footer>
+            <Footer />
             <Toaster position="top-right" closeButton richColors />
           </div>
         </ThemeProvider>
