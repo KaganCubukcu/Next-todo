@@ -60,11 +60,7 @@ export function TodoItem({ id, task, is_complete, onToggle, onDelete, onUpdate }
   return (
     <>
       <div className="flex items-center space-x-2 p-2 hover:bg-accent rounded-md">
-        <Checkbox
-          id={id}
-          checked={is_complete}
-          onCheckedChange={() => onToggle(id)}
-        />
+        <Checkbox id={id} checked={is_complete} onCheckedChange={() => onToggle(id)} />
         {isEditing ? (
           <form onSubmit={handleSubmit} className="flex-1">
             <input
@@ -81,7 +77,7 @@ export function TodoItem({ id, task, is_complete, onToggle, onDelete, onUpdate }
           <Label
             htmlFor={id}
             className={cn(
-              "flex-1 cursor-pointer",
+              "flex-1 cursor-pointer overflow-hidden text-ellipses",
               is_complete && "line-through text-muted-foreground"
             )}
             onDoubleClick={() => setIsEditing(true)}
@@ -89,10 +85,7 @@ export function TodoItem({ id, task, is_complete, onToggle, onDelete, onUpdate }
             {task}
           </Label>
         )}
-        <TodoActions
-          onEdit={() => setIsEditing(true)}
-          onDelete={() => setShowDeleteDialog(true)}
-        />
+        <TodoActions onEdit={() => setIsEditing(true)} onDelete={() => setShowDeleteDialog(true)} />
       </div>
 
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
