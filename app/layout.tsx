@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/ui/navbar";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 import { Footer } from "@/components/footer";
 import "./globals.css";
 
@@ -15,11 +15,7 @@ export const metadata = {
   description: "Focus Flow - Your Productivity Hub",
 };
 
-export default function RootLayout ({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       <body className="bg-background text-foreground">
@@ -34,10 +30,7 @@ export default function RootLayout ({
             <div className="flex-1 container py-8">
               <div className="flex-1 w-full flex flex-col gap-20 items-center">
                 <div className="flex flex-col gap-20 max-w-5xl p-5 pt-8">
-                  <div className="flex flex-col items-center">
-                    <h1 className="text-4xl font-bold mb-8">Focus Flow</h1>
-                    {children}
-                  </div>
+                  <div className="flex flex-col items-center">{children}</div>
                 </div>
               </div>
             </div>
