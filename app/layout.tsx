@@ -1,7 +1,9 @@
 import { Navbar } from "@/components/ui/navbar";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "sonner";
+import { Footer } from "@/components/footer";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -10,18 +12,15 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js Todo App",
-  description: "Next.js Todo App Supabase",
+  title: "Focus Flow",
+  description: "Focus Flow - Your Productivity Hub",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       <body className="bg-background text-foreground">
+        <Analytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -33,21 +32,12 @@ export default function RootLayout({
             <div className="flex-1 container py-8">
               <div className="flex-1 w-full flex flex-col gap-20 items-center">
                 <div className="flex flex-col gap-20 max-w-5xl p-5 pt-8">
-                  <div className="flex flex-col items-center">
-                    <h1 className="text-4xl font-bold mb-8">Next.js Todo App</h1>
-                    {children}
-                  </div>
+                  <div className="flex flex-col items-center">{children}</div>
                 </div>
               </div>
             </div>
-            <footer className="w-full border-t">
-              <div className="container flex h-14 items-center justify-between">
-                <p className="text-sm text-muted-foreground">
-                  Next Todo
-                </p>
-                <ThemeSwitcher />
-              </div>
-            </footer>
+            <Footer />
+            <Toaster position="top-right" closeButton richColors />
           </div>
         </ThemeProvider>
       </body>

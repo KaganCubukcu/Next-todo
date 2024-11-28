@@ -11,24 +11,43 @@ import {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { User } from "@supabase/supabase-js";
+import { ThemeSwitcher } from "../theme-switcher";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const supabase = createClient();
+  const pathname = usePathname();
+
+  const checkSession = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    setUser(session?.user ?? null);
+  };
+
+  // Check session on route changes
+  useEffect(() => {
+    checkSession();
+  }, [pathname]);
 
   useEffect(() => {
-    // Check authentication status
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
+    // Initial session check
+    checkSession();
 
     // Subscribe to auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
 
+    // Add focus event listener
+    const handleFocus = () => {
+      checkSession();
+    };
+
+    window.addEventListener('focus', handleFocus);
+
     return () => {
       subscription.unsubscribe();
+      window.removeEventListener('focus', handleFocus);
     };
   }, []);
 
@@ -41,11 +60,12 @@ export function Navbar() {
       <div className="h-16 container flex items-center justify-between">
         {/* Brand */}
         <Link href="/" className="font-bold text-xl">
-          Next Todo
+          Focus Flow
         </Link>
 
-        {/* Auth Section */}
-        <div>
+        {/* Theme and Auth Section */}
+        <div className="flex items-center">
+        <ThemeSwitcher />
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
