@@ -48,7 +48,7 @@ yarn install
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your_supabase_anon_key
 ```
 
 4. Set up your Supabase project:
@@ -81,7 +81,7 @@ Make sure to set up the following environment variables in your `.env.local` fil
 | Variable                        | Description                             |
 | ------------------------------- | --------------------------------------- |
 | `NEXT_PUBLIC_SUPABASE_URL`      | Your Supabase project URL               |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase project's anon/public key |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY` | Your Supabase project's anon/public key |
 
 ## Contributing
 
